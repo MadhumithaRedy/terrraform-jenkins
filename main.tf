@@ -4,12 +4,13 @@ provider "aws" {
   secret_key    ="qOk/3YhABgffnLmTe71BHmcR3qmsbuiD9mzEaCt9"
 }
 resource "aws_vpc" "vpc" {
- cidr_block	= "10.0.0/16"
+ cidr_block	= "10.0.0.0/16"
  tags = {
  Name = "madhu_vpc"
 }
 }
  resource "aws_subnet" "subnet" {
+ count = 2
  vpc_id		= aws_vpc.vpc.id
  cidr_block	="10.0.${count.index+1}.0/24"
  tags = {
